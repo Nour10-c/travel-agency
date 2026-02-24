@@ -32,7 +32,11 @@ export const AuthProvider = ({ children }) => {
       setUser({ token });
       return { success: true };
     } catch (error) {
-      return { success: false, message: error.response?.data?.message || 'Erreur de connexion' };
+      console.error('Login error:', error);
+      const errorMessage = error.response?.data?.message 
+        || error.message 
+        || 'Erreur de connexion. Vérifiez vos identifiants.';
+      return { success: false, message: errorMessage };
     }
   };
 
