@@ -3,10 +3,10 @@ import axios from 'axios';
 // Utiliser la variable d'environnement ou une URL par défaut
 // En développement local: http://localhost:5000
 // En production: utilisera REACT_APP_API_URL si défini
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://travel-agency-k953.onrender.com/api';
+const REACT_APP_API_URL='https://travel-agency-k953.onrender.com/api';
 
 const api = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: REACT_APP_API_URL,
 });
 
 // Intercepteur pour ajouter le token JWT aux requêtes
