@@ -18,7 +18,7 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json());
-
+app.use(cors());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/trips', require('./routes/trips'));
 app.use('/api/bookings', require('./routes/bookings'));
