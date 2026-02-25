@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  const login = async (email, password) => {
+const login = async (email, password) => {
     try {
       const response = await authAPI.login({ email, password });
       const { token } = response.data;
@@ -33,10 +33,22 @@ export const AuthProvider = ({ children }) => {
       return { success: true };
     } catch (error) {
       console.error('Login error:', error);
-      const errorMessage = error.response?.data?.message 
-        || error.message 
-        || 'Erreur de connexion. Vérifiez vos identifiants.';
-      return { success: false, message: errorMessage };
+      
+      // Différencier les types d'erreurs
+      let errorMessage;
+      if (!error.response) {
+        // Erreur réseau (CORS, serveur down, etc.)
+        errorMessage = 'Erreur de connexion au serveur. Vérifie que le backend est bien déployé.';
+        console.log('🔴 Erreur réseau détectée - Vérifie le backend sur Render');
+      } else if (error.response.status === 401) {
+        errorMessage = 'Email ou mot de passe incorrect.';
+      } else if (error.response.status === 403) {
+        errorMessage = 'Accès refusé.';
+      } else {
+        errorMessage = error.response?.data?.message || 'Erreur de connexion. Vérifiez vos identifiants.';
+      }
+      
+      return { success: false, message: errorMessage, isNetworkError: !error.response };
     }
   };
 
