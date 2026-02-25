@@ -12,7 +12,7 @@ app.use(helmet());
 app.use(morgan('combined'));
 app.use(cors({
   origin: [
-    'https://travel-agency-1ersjifay-nour10-cs-projects.vercel.app',
+    'https://travel-agency-jo1vcgn92-nour10-cs-projects.vercel.app',
     'http://localhost:3000'
   ],
   credentials: true
