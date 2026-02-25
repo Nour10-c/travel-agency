@@ -11,14 +11,13 @@ const app = express();
 app.use(helmet());
 app.use(morgan('combined'));
 app.use(cors({
-  origin: ['https://travel-agency-k953.onrender.com', 'http://localhost:3000'],
+  origin: [
+    'https://travel-agency-1ersjifay-nour10-cs-projects.vercel.app',
+    'http://localhost:3000'
+  ],
   credentials: true
 }));
 app.use(express.json());
-
-
-mongoose.connect(process.env.MONGO_URI);
-
 
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/trips', require('./routes/trips'));
